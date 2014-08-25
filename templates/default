@@ -1,0 +1,9 @@
+default {{ os_family }}
+
+{% for label in labels -%}
+label {{ label.os_family }}
+  kernel {{ label.kernel }}
+  ipappend 2
+  append{% for arg in label.kernel_args %} {{ arg }}{% endfor %} dns={{ dns }} ks={{ kickstart }}
+
+{% endfor %}
