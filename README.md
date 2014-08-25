@@ -3,8 +3,8 @@ Docker PXE Server Container
 
 This project is for generating a PXE server for different environments. It uses 
 Jinja2 templates and context files to generate the specific configuration and 
-kickstart files for the pxe server. The image is build with most of the popular
-pxe targets iamges built in.
+kickstart files for the pxe server. The image is built with most of the popular
+pxe target images built in.
 
 Dependencies
 ------------
