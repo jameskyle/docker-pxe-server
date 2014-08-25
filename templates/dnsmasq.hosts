@@ -1,0 +1,4 @@
+# Docker Hosts
+{% for host in hosts -%}
+{{ host.address }} {{ host.hostname }}.{{ domain }} {{ host.hostname }}
+{% endfor -%}

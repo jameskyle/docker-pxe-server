@@ -1,0 +1,47 @@
+#!/usr/bin/env python
+"""
+Author:: James A. Kyle
+
+Renders the provided template using variables from context file.
+
+Warning::
+
+    This script is *unsafe* it uses an include symantic that could be
+    considered a security risk. It should _never_ be used with untrused
+    input  files.
+
+"""
+
+import yaml
+import sys
+import os
+from jinja2 import Environment, FileSystemLoader
+
+
+def yaml_include(loader, node):
+    # Get the path out of the yaml file
+    file_name = os.path.join(os.path.dirname(loader.name), node.value)
+
+    with file(file_name) as inputfile:
+        return yaml.load(inputfile)
+
+
+def render(name, context):
+    env = Environment(loader=FileSystemLoader(searchpath="templates"))
+    template = env.get_template(name)
+
+    with open('contexts/{0}.yaml'.format(context)) as context_file:
+        template_vars = yaml.load(context_file)
+        for key, value in template_vars["defaults"].iteritems():
+            if not template_vars.has_key(key):
+                template_vars[key] = value
+
+    output = template.render(template_vars)
+
+    print(output)
+
+if __name__ == "__main__":
+    yaml.add_constructor("!include", yaml_include)
+
+    render(*sys.argv[1:])
+

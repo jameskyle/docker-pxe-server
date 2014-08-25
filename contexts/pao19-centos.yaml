@@ -1,0 +1,50 @@
+defaults: !include defaults.yml
+domain: pao19.tfoundry.com
+servers: 
+    - 8.8.8.8
+    - 8.8.4.4
+ranges:
+    - 10.252.19.11,10.252.19.100,255.255.255.0,45m
+    - 172.16.19.10,172.16.19.253,255.255.255.0,45m
+options:
+    - 1,255.255.255.0         # netmask
+    - 2,-25200              # GMT-7
+    - 3,10.252.19.1         # Gateway
+    - 6,10.252.19.10         # DNS Server (this server’s IP address)
+    - 15,pao19.tfoundry.com  # DNS Domain Name (optional)
+    - 119,pao19.tfoundry.com # DNS Search Suffix (optional)
+
+hosts:
+    - hostname: dock1
+      mac: b8:ca:3a:66:0e:ec
+      address: 10.252.19.10
+    - hostname: dock2
+      mac: b8:ca:3a:66:2e:60
+      address: 10.252.19.11
+    - hostname: dock3
+      mac: bc:30:5b:f2:df:14
+      address: 10.252.19.12
+    - hostname: dock4
+      mac: b8:ca:3a:65:f3:e8
+      address: 10.252.19.13
+    - hostname: dock5
+      mac: b8:ca:3a:65:ee:6c
+      address: 10.252.19.14
+
+http_port: 80
+os_family: CentOS 7
+kernel: centos/7/vmlinuz
+initrd: centos/7/initrd.img
+repo: http://mirror.anl.gov/pub/centos/7/os/x86_64/
+repo_name: Argonne National Labratory
+dns: 10.252.19.10
+kickstart: http://dock1.pao19.tfoundry.com/centos.cfg
+
+username: jkyle
+timezone: America/Los_Angeles
+gecos: James Kyle
+# sha512 hashed password -> docker
+password: $6$rounds=100000$od.uDrLAfPmN1CwQ$1eTPQLXw9DPez50ZiyyoV8YS5BYD/xgeGI8X6WsYRvKXf0gEIK2D90cJmF6W5AgFmeN14hUH7qeppQFTSxXtB0
+passalgo: sha512
+pubkey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC/KTbhKZEL19BhHovHamtMLJNv85nC1GKpRvp3PAI1xEvze63cTwC43HqbvBJEWIyMQYTZDfHxujJSxy2KMvwU96fVhxQbA+SieMskxjlujXiU0WAwIlzo+5dZhgdMwTX0YUD5NwkVoELG/wAFiOZ0f4gbjOK8ossHGGNWGYl5b/pFbzb4ih2y+3LM80s8KBj3CF5bJS57fkhiYAwPIyWnqMgcaVsAcfL7XXPZsabzH9eVMmngfwimMkn0wzujuGrtw+bFGoEfDyD2HeY/bEn7eoBO9AMiyR25a5fIYvniRiOKCNkzSQeZfj5S45+SS82YZc7qtuZzRPmNyVkgFDLx jkyle@Air-Protoss.local
+

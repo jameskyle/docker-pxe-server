@@ -1,0 +1,18 @@
+http_port: 80
+dns: 10.252.19.10
+
+labels:
+    - os_family: Ubuntu Trusty (14.04)
+      kernel: ubuntu/trusty/linux
+      kernel_args:
+        - ksdevice=bootif
+        - initrd=ubuntu/trusty/initrd.gz
+        - vga=normal
+    - os_family: CentOS 7 PXE Install
+      kernel: centos/7/vmlinuz 
+      kernel_args:
+        - ksdevice=bootif 
+        - repo=http://mirror.anl.gov/pub/centos/7/os/x86_64/ 
+        - load_ramdisk=1 
+        - initrd=centos/7/initrd.img 
+        - network 
